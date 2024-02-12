@@ -3,3 +3,15 @@ PORT = 3000
 
 ### testing the server
 GET http://localhost:3000
+
+
+
+### testing the server
+POST http://localhost:3000/auth/register
+content-type: application/json
+
+{
+    "name":"client",
+    "email":"client@email.com",
+    "password":"123456"
+}
