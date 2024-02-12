@@ -28,6 +28,7 @@ content-type: application/json
 }
 
 
+
 ############# PRODUCTS #############
 
 ### add/create product
@@ -35,10 +36,16 @@ POST http://localhost:3000/product/add
 content-type: application/json
 
 {
+    "SKU": "06-59643618",
     "name": "Vans Ward Black Sneaker",
-    "description": "This style combines the original and now iconic Vans low top style with sturdy canvas/suede uppers and signature rubber waffle outsoles. SKU: 06-59274953",
-    "image": "https://thefoschini.vtexassets.com/arquivos/ids/108564687-1600-1600?v=638425571891500000&width=1600&height=1600&aspect=true",
-    "size": [3, 4, 5, 6, 7, 8],
+    "description": "A sturdy rubber outsole offers dependable traction. Made with a series of recycled materials, this upper features at least 50% recycled content. ",
+    "image": "https://thefoschini.vtexassets.com/arquivos/ids/108588583-1200-1200?v=638425587132100000&width=1200&height=1200&aspect=true",
+    "size": [3, 4, 7, 8],
     "stock": 50,
-    "price": 1200
+    "price": 1000
 }
+
+
+
+### view all products
+GET http://localhost:3000/product/all

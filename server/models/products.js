@@ -2,6 +2,10 @@ const Mongoose = require("mongoose");
 
 // database products schema (table in sql) 
 const ProductSchema = new Mongoose.Schema({
+    SKU: {
+        type: String,
+        required: true,
+    },
     name: {
         type: String,
         required: true,
@@ -10,10 +14,10 @@ const ProductSchema = new Mongoose.Schema({
         type: String,
         required: true,
     },
-    image: {
+    image: [{
         type: String,
         required: true,
-    },
+    }],
     size: [{
         type: Number,
         required: true,
@@ -27,7 +31,6 @@ const ProductSchema = new Mongoose.Schema({
         currency: "ZAR",
         required: true,
     },
-
 }, {
     timestamps: true
 })
