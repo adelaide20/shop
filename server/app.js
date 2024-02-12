@@ -23,6 +23,14 @@ app.use(cors(corsOptions))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+// local files import
+const connectDB = require("./config/dbConfig");
+
+//Connecting the Database
+connectDB();
+
+
 // basic route for testing
 app.get('/', (req, res) => res.send('Hello, Welcome To Sneaker App'))
 
