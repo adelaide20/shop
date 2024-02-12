@@ -111,5 +111,22 @@ exports.updateProduct = async(req, res) => {
 
 // ========== DELETE A PRODUCT ==========
 exports.deleteProduct = async(req, res) => {
+    const product = await productsModel.findById(req.params.id);
 
+    if (!product) {
+        res.status(400);
+        throw new Error('product not found');
+    }
+
+    try {
+        await productsModel.remove();
+        res.status(200).json({
+            message: "Product successfully deleted",
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "An error occurred while adding a product",
+            error: error.message
+        })
+    }
 }
