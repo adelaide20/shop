@@ -1,12 +1,15 @@
-const User = require('../models/user')
+const User = require('../models/user');
+const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
 
-// USER REGISTRATION
+
+// ========== USER REGISTRATION ==========
 exports.register = async(req, res) => {
 
     // 1. get user data from the body
     const { name, email, password, role } = req.body;
 
-    // 2. check if the user does not exist
+    // 2. input validation
     if (!name || !email || !password) {
         res.status(401).json({
             message: "All fields are required!"
@@ -49,4 +52,67 @@ exports.register = async(req, res) => {
     }
 
 
+}
+
+
+
+// ========== USER LOGIN ==========
+exports.login = async(req, res) => {
+
+    // 1. get user data from the body
+    const { email, password } = req.body;
+
+    // 2. user validation
+    if (!email || !password) {
+        res.status(401).json({
+            message: "All fields are required!"
+        })
+    }
+
+    // 3. check if user exists
+    const checkUser = await User.findOne({ email });
+
+    // 4. compare password with db hashed password
+    const comparePass = await bcrypt.compare(req.body.password, checkUser.password)
+
+    // 5. user object holding login details
+    const user = await new User({
+        name: checkUser.name,
+        email,
+        password: comparePass,
+        role: checkUser.role
+    })
+
+    // 6. if user doesn't exist return error, else generate token and login user
+    try {
+        if (!checkUser || !comparePass) {
+            res.status(401).json({
+                message: "Email or Password incorrect",
+                error: "Invalid user",
+            });
+        } else {
+            // 7. generate token
+            const token = jwt.sign({
+                    id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    role: user.role
+
+                },
+                process.env.JWT_KEY, { expiresIn: 28800 }
+            );
+
+            res.status(201).json({
+                message: "login is succesful",
+                user,
+                token,
+            })
+
+        }
+    } catch (error) {
+        res.status(400).json({
+            message: "An error occurred",
+            error: error.message,
+        });
+    }
 }

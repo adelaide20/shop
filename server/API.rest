@@ -6,12 +6,23 @@ GET http://localhost:3000
 
 
 
-### testing the server
+### user registration
 POST http://localhost:3000/auth/register
 content-type: application/json
 
 {
     "name":"client",
+    "email":"client@email.com",
+    "password":"123456"
+}
+
+
+
+### user login
+POST http://localhost:3000/auth/login
+content-type: application/json
+
+{
     "email":"client@email.com",
     "password":"123456"
 }
