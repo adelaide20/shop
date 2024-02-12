@@ -49,3 +49,8 @@ content-type: application/json
 
 ### view all products
 GET http://localhost:3000/product/all
+
+
+
+### view one product
+GET http://localhost:3000/product/65ca01aa075f2dff7d3f4118

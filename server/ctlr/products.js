@@ -65,7 +65,16 @@ exports.allProducts = async(req, res) => {
 
 // ========== VIEW ONE PRODUCT ==========
 exports.oneProduct = async(req, res) => {
-
+    const id = req.body;
+    try {
+        const product = await productsModel.findOne(id);
+        res.status(200).json(product);
+    } catch (error) {
+        res.status(401).json({
+            message: "An error occurred while adding a product",
+            error: error.message
+        })
+    }
 }
 
 
