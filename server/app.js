@@ -33,8 +33,9 @@ connectDB();
 
 // basic route for testing
 app.get('/', (req, res) => res.send('Hello, Welcome To Sneaker App'));
-// user registration route
-app.use('/auth', require("./routes/auth"))
+
+// user auth route
+app.use('/auth', require("./routes/auth"));
 
 
-app.listen(port, () => console.log(`Example app listening on port  ${port}`))
+app.listen(port, () => console.log(`Example app listening on port  ${port}`));

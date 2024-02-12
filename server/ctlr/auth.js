@@ -47,7 +47,7 @@ exports.register = async(req, res) => {
     } catch (error) {
         res.status(401).json({
             message: "An error occurred while adding a user",
-            error: error.message,
+            error: error.message
         })
     }
 
@@ -83,7 +83,7 @@ exports.login = async(req, res) => {
         role: checkUser.role
     })
 
-    // 6. if user doesn't exist return error, else generate token and login user
+    // 6. if user doesn't exist or passwords don't match return error, else generate token and login user
     try {
         if (!checkUser || !comparePass) {
             res.status(401).json({
@@ -102,6 +102,7 @@ exports.login = async(req, res) => {
                 process.env.JWT_KEY, { expiresIn: 28800 }
             );
 
+            // 8. sucsessful login 
             res.status(201).json({
                 message: "login is succesful",
                 user,
@@ -110,9 +111,9 @@ exports.login = async(req, res) => {
 
         }
     } catch (error) {
-        res.status(400).json({
-            message: "An error occurred",
-            error: error.message,
+        res.status(401).json({
+            message: "An error occurred while trying to login",
+            error: error.message
         });
     }
 }
