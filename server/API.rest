@@ -53,4 +53,15 @@ GET http://localhost:3000/product/all
 
 
 ### view one product
-GET http://localhost:3000/product/65ca01aa075f2dff7d3f4118
+GET http://localhost:3000/product/one/65ca01aa075f2dff7d3f4118
+
+
+
+### update a product
+PUT http://localhost:3000/product/update/65ca01aa075f2dff7d3f4118
+content-type: application/json
+
+{
+    "size": [3, 4, 6, 7, 8],
+    "stock": 10
+}

@@ -40,7 +40,7 @@ exports.addProduct = async(req, res) => {
         }
 
     } catch (error) {
-        res.status(401).json({
+        res.status(500).json({
             message: "An error occurred while adding a product",
             error: error.message
         })
@@ -55,7 +55,7 @@ exports.allProducts = async(req, res) => {
         const products = await productsModel.find();
         res.status(200).json(products);
     } catch (error) {
-        res.status(401).json({
+        res.status(500).json({
             message: "An error occurred while adding a product",
             error: error.message
         })
@@ -65,12 +65,19 @@ exports.allProducts = async(req, res) => {
 
 // ========== VIEW ONE PRODUCT ==========
 exports.oneProduct = async(req, res) => {
-    const id = req.body;
+    const product = await productsModel.findById(req.params.id);
+
+    if (!product) {
+        res.status(400);
+        throw new Error('product not found');
+    }
+
+
     try {
-        const product = await productsModel.findOne(id);
+        const product = await productsModel.findById(req.params.id);
         res.status(200).json(product);
     } catch (error) {
-        res.status(401).json({
+        res.status(500).json({
             message: "An error occurred while adding a product",
             error: error.message
         })
@@ -80,7 +87,25 @@ exports.oneProduct = async(req, res) => {
 
 // ========== UPDATE A PRODUCT ==========
 exports.updateProduct = async(req, res) => {
+    const product = await productsModel.findById(req.params.id);
 
+    if (!product) {
+        res.status(400);
+        throw new Error('product not found');
+    }
+
+    try {
+        const productUpdate = await productsModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.status(200).json({
+            message: "Product successfully modified",
+            productUpdate
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "An error occurred while adding a product",
+            error: error.message
+        })
+    }
 }
 
 

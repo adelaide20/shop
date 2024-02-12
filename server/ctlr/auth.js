@@ -45,7 +45,7 @@ exports.register = async(req, res) => {
         }
 
     } catch (error) {
-        res.status(401).json({
+        res.status(500).json({
             message: "An error occurred while adding a user",
             error: error.message
         })
@@ -111,7 +111,7 @@ exports.login = async(req, res) => {
 
         }
     } catch (error) {
-        res.status(401).json({
+        res.status(500).json({
             message: "An error occurred while trying to login",
             error: error.message
         });
