@@ -14,16 +14,16 @@ const ProductSchema = new Mongoose.Schema({
         type: String,
         required: true,
     },
-    size: {
+    size: [{
         type: Number,
         required: true,
-    },
+    }],
     stock: {
         type: Number,
         required: true,
     },
     price: {
-        type: NumberDecimal(14.99),
+        type: Number,
         currency: "ZAR",
         required: true,
     },

@@ -37,5 +37,8 @@ app.get('/', (req, res) => res.send('Hello, Welcome To Sneaker App'));
 // user auth route
 app.use('/auth', require("./routes/auth"));
 
+// products route
+app.use('/product', require("./routes/product"));
+
 
 app.listen(port, () => console.log(`Example app listening on port  ${port}`));

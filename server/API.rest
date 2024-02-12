@@ -4,7 +4,7 @@ PORT = 3000
 ### testing the server
 GET http://localhost:3000
 
-
+############# AUTH #############
 
 ### user registration
 POST http://localhost:3000/auth/register
@@ -25,4 +25,20 @@ content-type: application/json
 {
     "email":"client@email.com",
     "password":"123456"
+}
+
+
+############# PRODUCTS #############
+
+### add/create product
+POST http://localhost:3000/product/add
+content-type: application/json
+
+{
+    "name": "Vans Ward Black Sneaker",
+    "description": "This style combines the original and now iconic Vans low top style with sturdy canvas/suede uppers and signature rubber waffle outsoles. SKU: 06-59274953",
+    "image": "https://thefoschini.vtexassets.com/arquivos/ids/108564687-1600-1600?v=638425571891500000&width=1600&height=1600&aspect=true",
+    "size": [3, 4, 5, 6, 7, 8],
+    "stock": 50,
+    "price": 1200
 }
