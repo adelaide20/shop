@@ -119,7 +119,7 @@ exports.deleteProduct = async(req, res) => {
     }
 
     try {
-        await productsModel.remove();
+        await productsModel.remove(product);
         res.status(200).json({
             message: "Product successfully deleted",
         });
